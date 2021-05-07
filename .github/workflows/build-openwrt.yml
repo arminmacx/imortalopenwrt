@@ -41,13 +41,10 @@ jobs:
         cd /home/runner
         bash ${GITHUB_WORKSPACE}/clone_source.sh
         sudo chown -R runner:runner immortalwrt
-    - name: Before Build
-      run: |
-        /bin/bash ${GITHUB_WORKSPACE}/before_build.sh
-        cp -fpR ${GITHUB_WORKSPACE}/. /home/runner/immortalwrt/
 
-#    - name: SSH connection to Actions
-#      uses: csexton/debugger-action@master
+    - name: SSH connection to Actions
+      uses: P3TERX/ssh2actions@v1.0.0
+      if: env.SSH_ACTIONS == 'true'
 
     - name: Start Build
       run: | 
