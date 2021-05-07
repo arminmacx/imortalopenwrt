@@ -11,6 +11,13 @@ on:
 #  watch:
 #    types: started
 #  repository_dispatch:
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: 'true'
 
 jobs:
   build:
@@ -49,7 +56,7 @@ jobs:
     - name: Start Build
       run: | 
         cd /home/runner/immortalwrt
-        config_names="$(ls .config*)"
+        config_names="$(ls .config)"
         for i in $config_names;do mv -f $i .config; make defconfig; make -j$[$(nproc)+1]; rm -rf build_dir/target* build_dir/toolchain* staging_dir/target* staging_dir/toolchain*; done
 
     - name: Upload Packages
