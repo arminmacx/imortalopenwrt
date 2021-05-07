@@ -53,9 +53,7 @@ jobs:
         rm -f .config.old
         config_names="$(ls .config*)"
         for i in $config_names;do mv -f $i .config; make defconfig; make -j$[$(nproc)+1]; rm -rf build_dir/target* build_dir/toolchain* staging_dir/target* staging_dir/toolchain*; done
-    - name: After Build
-      run: |
-        /bin/bash /home/runner/immortalwrt/after_build.sh
+
     - name: Upload Packages
       uses: actions/upload-artifact@v2
       with:
