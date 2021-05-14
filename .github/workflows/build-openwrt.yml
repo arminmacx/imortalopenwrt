@@ -19,9 +19,6 @@ on:
         required: false
         default: 'true'
 
-env:
-  BEFORE_BUILD: before_build.sh
-
 jobs:
   build:
     runs-on: ubuntu-18.04
@@ -51,13 +48,6 @@ jobs:
         cd /home/runner
         bash ${GITHUB_WORKSPACE}/clone_source.sh
         sudo chown -R runner:runner immortalwrt
-
-    - name: Load custom feeds
-      run: |
-        # [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
-        chmod +x $BEFORE_BUILD
-        cd /home/runner/immortalwrt
-        $GITHUB_WORKSPACE/$BEFORE_BUILD
         
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
