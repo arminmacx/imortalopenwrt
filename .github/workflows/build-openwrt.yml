@@ -56,7 +56,9 @@ jobs:
     - name: Start Build
       run: | 
         cd /home/runner/immortalwrt
-        make defconfig; make -j$[$(nproc)+1]; rm -rf build_dir/target* build_dir/toolchain* staging_dir/target* staging_dir/toolchain*; done
+        make defconfig
+        make -j$[$(nproc)+1]
+        rm -rf build_dir/target* build_dir/toolchain* staging_dir/target* staging_dir/toolchain*
 
     - name: Upload Packages
       uses: actions/upload-artifact@v2
